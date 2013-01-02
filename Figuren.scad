@@ -43,8 +43,8 @@ module Haus(nx=1, ny=1, margin=def_margin) {
 
 module Strasse(nx=1, ny=1, margin=def_margin){
     for ( x = [0 : nx - 1], y = [0 : ny - 1] ) {
-        translate([x * b_str - def_margin, y * b_str - def_margin, -def_margin])
-            cube([b_str + 2 * def_margin, b_str + 2 * def_margin, t_str + 2 * def_margin]);
+        translate([x * b_str - margin, y * b_str - margin, -margin])
+            cube([b_str + 2 * margin, b_str + 2 * margin, t_str + 2 * margin]);
     }
 }
 
