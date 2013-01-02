@@ -33,14 +33,6 @@ module BasisFiguren(){
 	translate([(b_basisFiguren - t_str) / 2, t_turm + t_haus, t_str - b_str / 2]) rotate([0,90,0]) Strasse(nx=3);
 }
 
-
-
-module Ritter(margin=def_margin){
-	translate([-margin,r_ritter,r_ritter])
-		rotate([0,90,0])
-			cylinder(r=r_ritter + margin, h=h_ritter_6 + 2 * margin, center=false, $fa=1, $fs=0.1);
-}
-
 module RitterFigurenSchmal(h_box = b_mauer - r_ritter) {
 	translate([(2 * b_mauer - h_ritter_6) / 2, 0, h_box - r_ritter]) Ritter(.5);
 	translate([0,2 * r_ritter, 0]) Mauer();
@@ -50,7 +42,7 @@ module RitterFigurenSchmal(h_box = b_mauer - r_ritter) {
 
 module RitterFiguren(h_box = b_mauer - r_ritter) {
 	translate([h_mauer,0,0]) rotate([0,0,90]) Mauer();
-	translate([h_mauer, 0, h_box - r_ritter]) Ritter(2 * def_margin);
+	translate([h_mauer, 0, h_box - r_ritter]) Ritter(margin = 2 * def_margin);
 	translate([2 * h_mauer + h_ritter_6, 0]) rotate([0,0,90]) Mauer();
 	translate([(2 * h_mauer + h_ritter_6 - b_mauer) / 2, 2 * r_ritter, 0]) Mauer();
 }
