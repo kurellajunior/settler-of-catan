@@ -7,7 +7,8 @@ b_str_5_2  = 2 * b_str_5 + 1;
 b_4k_2s    = 2 * b_str + b_kirche_4;
 h_ritter_6 = 6 * h_ritter;
 
-b_basisFiguren  = max(b_haus_5, max(b_str_5_2, b_4k_2s));
+b_max_str   = max(b_str_5_2, b_4k_2s);
+b_basisFiguren  = max(b_haus_5, b_max_str);
 b_ritterFiguren = h_ritter_6 + 2 * h_mauer;
 
 module BasisFiguren(){
@@ -16,15 +17,15 @@ module BasisFiguren(){
 	// Houses
 	translate([(b_basisFiguren - b_haus_5) / 2, t_turm, h_kSchiff]) Haus(nx=5);
 	// Straße 1-4
-	translate([(b_basisFiguren - b_4k_2s) / 2, 0,     0]) Strasse();
-	translate([(b_basisFiguren - b_4k_2s) / 2, b_str, 0]) Strasse();
-	translate([(b_basisFiguren - b_4k_2s) / 2, t_turm - b_str, 0]) Strasse();
-	translate([b_basisFiguren - (b_basisFiguren - b_4k_2s) / 2 - b_str, 0,     0]) Strasse();
-	translate([b_basisFiguren - (b_basisFiguren - b_4k_2s) / 2 - b_str, b_str, 0]) Strasse();
-	translate([b_basisFiguren - (b_basisFiguren - b_4k_2s) / 2 - b_str, t_turm - b_str, 0]) Strasse();
+	translate([(b_basisFiguren - b_max_str) / 2, 0,     0]) Strasse();
+	translate([(b_basisFiguren - b_max_str) / 2, b_str, 0]) Strasse();
+	translate([(b_basisFiguren - b_max_str) / 2, t_turm - b_str, 0]) Strasse();
+	translate([b_basisFiguren - (b_basisFiguren - b_max_str) / 2 - b_str, 0,     0]) Strasse();
+	translate([b_basisFiguren - (b_basisFiguren - b_max_str) / 2 - b_str, b_str, 0]) Strasse();
+	translate([b_basisFiguren - (b_basisFiguren - b_max_str) / 2 - b_str, t_turm - b_str, 0]) Strasse();
 	// Straße 5-14
-	translate([(b_basisFiguren - b_4k_2s) / 2, t_turm + t_haus, 0]) Strasse(nx=5);
-	translate([b_basisFiguren - (b_basisFiguren - b_4k_2s) / 2 - b_str_5, t_turm + t_haus, 0]) Strasse(nx=5);
+	translate([(b_basisFiguren - b_max_str) / 2, t_turm + t_haus, 0]) Strasse(nx=5);
+	translate([b_basisFiguren - (b_basisFiguren - b_max_str) / 2 - b_str_5, t_turm + t_haus, 0]) Strasse(nx=5);
 	// letzte Straße
 	translate([(b_basisFiguren - t_str) / 2, t_kirche, h_kSchiff]) rotate([0,90,0]) Strasse();
 	// dünnen Hohlraum entfernen
