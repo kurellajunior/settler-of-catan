@@ -7,6 +7,7 @@ t_turm     = 10.6;
 h_turm     = 15.2;
 
 b_haus     = 10;
+b_haus     = 9.8;
 t_haus     = 15;
 h_haus     = 8;
 
