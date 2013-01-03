@@ -15,56 +15,56 @@ module HalteRahmen(breite, tiefe, h, dx, dy, delta=0) {
 }
 
 
-module HalfBox(x, y, z, dx, dy, dz) {
-	innerX = x - 2 * dx;
-	innerY = y - 2 * dy;
-	translate([ 0, dy, dz]) cube([x, innerY, z - dz]);
-	translate([dx,  0, dz]) cube([innerX, y, z - dz]);
-	translate([dx, dy,  0]) cube([innerX, innerY, z]);
+module HalfBox(x, y, z, rx, ry, rz) {
+	innerX = x - 2 * rx;
+	innerY = y - 2 * ry;
+	translate([ 0, ry, rz]) cube([x, innerY, z - rz]);
+	translate([rx,  0, rz]) cube([innerX, y, z - rz]);
+	translate([rx, ry,  0]) cube([innerX, innerY, z]);
 	// bottom cylinders
-	translate([ dx + innerX/2, dy, dz]) rotate([0,90,0]) ellipse_prism(rx = dz, ry = dy, height = innerX);
-	translate([ dx + innerX/2, dy + innerY, dz]) rotate([0,90,0]) ellipse_prism(rx = dz, ry = dy, height = innerX);
-	translate([ dx, dy + innerY/2, dz]) rotate([90,0,0]) ellipse_prism(rx = dx, ry = dz, height = innerY);
-	translate([ dx + innerX, dy + innerY/2, dz]) rotate([90,0,0]) ellipse_prism(rx = dx, ry = dz, height = innerY);
+	translate([ rx + innerX/2, ry, rz]) rotate([0,90,0]) ellipse_prism(rx = rz, ry = ry, height = innerX);
+	translate([ rx + innerX/2, ry + innerY, rz]) rotate([0,90,0]) ellipse_prism(rx = rz, ry = ry, height = innerX);
+	translate([ rx, ry + innerY/2, rz]) rotate([90,0,0]) ellipse_prism(rx = rx, ry = rz, height = innerY);
+	translate([ rx + innerX, ry + innerY/2, rz]) rotate([90,0,0]) ellipse_prism(rx = rx, ry = rz, height = innerY);
 	// corner
-	for (x = [dx, dx+innerX], y = [dy, dy+innerY]) {
-		translate([x, y, (z+dz)/2]) ellipse_prism(rx = dx, ry = dy, height = z - dz);
-		translate([x, y, dz]) ellipsoid(dx, dy,dz);
+	for (x = [rx, rx+innerX], y = [ry, ry+innerY]) {
+		translate([x, y, (z+rz)/2]) ellipse_prism(rx = rx, ry = ry, height = z - rz);
+		translate([x, y, rz]) ellipsoid(rx, ry,rz);
 	}
 }
 
-module FullBoxBottom(x, y, z, dx, dy, dz) {
-	HalfBox(x, y, z, dx, dy, dz);
-	translate([dx / 2, dy / 2, z]) HalteRahmen(x - dx, y - dy, h_kante, dx/2, dy/2, delta = -printer_delta);
+module FullBoxBottom(x, y, z, rx, ry, rz) {
+	HalfBox(x, y, z, rx, ry, rz);
+	translate([rx / 2, ry / 2, z]) HalteRahmen(x - rx, y - ry, h_kante, rx/2, ry/2, delta = -printer_delta);
 }
 
-module BoxBottom(x, y, z, dx=2, dy=2, dz=2, empty=false) {
+module BoxBottom(x, y, z, rx=2, ry=2, rz=2, empty=false) {
 	if (empty) {
 		difference() {
-			FullBoxBottom(x, y, z, dx, dy, dz);
-			translate([dx,dy,dz]) cube([x - 2 * dx, y - 2 * dy, z + h_kante]);
+			FullBoxBottom(x, y, z, rx, ry, rz);
+			translate([rx,ry,rz]) cube([x - 2 * rx, y - 2 * ry, z + h_kante]);
 		}
 	} else {
-			FullBoxBottom(x, y, z, dx, dy, dz);
+			FullBoxBottom(x, y, z, rx, ry, rz);
 	}
 }
 
 // Deckel
-module BoxTop(x, y, z, dx=2, dy=2, dz=2, empty=false) {
+module BoxTop(x, y, z, rx=2, ry=2, rz=2, empty=false) {
 	difference() {
-		translate([0, y, z]) rotate([180,0,0]) HalfBox(x, y, z, dx, dy, dz);
+		translate([0, y, z]) rotate([180,0,0]) HalfBox(x, y, z, rx, ry, rz);
 		if (empty) {
-			translate([dx,dy,0]) cube([x - 2 * dx, y - 2 * dy,z - dz]);
+			translate([rx,ry,0]) cube([x - 2 * rx, y - 2 * ry,z - rz]);
 		}
-		translate([dx / 2, dy / 2, 0]) HalteRahmen(x - dx, y - dy, h_kante, dx/2, dy/2, delta = printer_delta);
+		translate([rx / 2, ry / 2, 0]) HalteRahmen(x - rx, y - ry, h_kante, rx/2, ry/2, delta = printer_delta);
 	}
 }
 
 
 /*
-module emptyBox(x, y, z_bottom, z_top, dx=2, dy=2, dz=2) {
-	BoxBottom(x, y, z_bottom, dx, dy, dz, empty=true);
-	translate([0,-5,z_top]) rotate([180,0,0]) BoxTop(x, y, z_top, dx, dy, dz, empty=false);
+module emptyBox(x, y, z_bottom, z_top, rx=2, ry=2, rz=2) {
+	BoxBottom(x, y, z_bottom, rx, ry, rz, empty=true);
+	translate([0,-5,z_top]) rotate([180,0,0]) BoxTop(x, y, z_top, rx, ry, rz, empty=false);
 }
 
 emptyBox(40, 30, 12, 8, 2.5, 2.5, 2, 	$fn=32);
