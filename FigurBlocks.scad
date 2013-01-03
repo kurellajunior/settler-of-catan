@@ -3,7 +3,7 @@ include <Figuren.scad>
 b_kirche_4 = 4 * b_kirche;
 b_haus_5   = 5 * b_haus;
 b_str_5    = 5 * b_str;
-b_str_5_2  = 2 * b_str_5 + 1;
+b_str_5_2  = 2 * b_str_5 + 1 + 2*def_margin;
 b_4k_2s    = 2 * b_str + b_kirche_4;
 h_ritter_6 = 6 * h_ritter;
 
