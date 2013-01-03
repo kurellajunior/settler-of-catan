@@ -31,7 +31,7 @@ module BasisFiguren(){
 	// dünnen Hohlraum entfernen
 	translate([(b_basisFiguren - t_str) / 2, t_turm + t_haus - b_str, h_kSchiff]) rotate([0,90,0]) Strasse();
 	// vertikalen Hohlraum ausnehmen
-	translate([(b_basisFiguren - t_str) / 2, t_turm + t_haus, t_str - b_str / 2]) rotate([0,90,0]) Strasse(nx=3);
+	translate([(b_basisFiguren - t_str) / 2, t_turm + t_haus, t_str - b_str / 2]) rotate([0,90,0]) Strasse(nx=2);
 }
 
 module RitterFigurenSchmal(h_box = b_mauer - r_ritter) {
