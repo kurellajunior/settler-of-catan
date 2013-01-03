@@ -53,10 +53,10 @@ module RitterBox() {
 			translate([rand, t_basisBox - rand + steg, boden])
 				scale([x_scale,1,1]) RitterFiguren(h_boxBoden);
 			//save some volume
-			translate([(b_basisFiguren - b_haus_5) / 2 + rand - def_margin,
+			translate([(b_basisFiguren - b_haus_5) / 2 + rand + 1.5*def_margin,
 						rand - def_margin,
 						boden + h_turm])
-				cube([b_haus_5 + 2*def_margin, t_turm + t_haus + 2*def_margin, h_haus - b_haus/2 + def_margin]);
+				cube([b_haus_5 - 3*def_margin, t_turm + t_haus + 2*def_margin, h_haus - b_haus/2 + def_margin]);
 		}
 	echo("Breite", b_box, "Tiefe", t_ritterBox, "Höhe", h_boxBoden + h_boxDeckel);
 }
