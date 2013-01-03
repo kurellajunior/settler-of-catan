@@ -48,8 +48,6 @@ module Haus(nx=1, ny=1, margin=def_margin) {
     }
 }
 
-Kirche(margin=1);
-
 module Strasse(nx=1, ny=1, margin=def_margin){
     for ( x = [0 : nx - 1], y = [0 : ny - 1] ) {
         translate([x * b_str - margin, y * b_str - margin, -margin])
