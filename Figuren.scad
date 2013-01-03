@@ -16,30 +16,39 @@ t_str      = 25.5;
 
 module Kirche(width=b_kirche, count=1, margin=def_margin) {
     h_dach = h_turm + t_turm / 2;
-    minkowski(){
+    translate([-margin, 0, 0])
         rotate([0,90,0])
-            linear_extrude(height=width * count, convexity=10) {
+            linear_extrude(height=width * count + 2*margin, convexity=10)
                 polygon(points=[
-                    [0,0], [-h_turm,0], [-h_dach,t_turm / 2], [-h_turm, t_turm],
-                    [-h_kSchiff,t_turm], [-h_kSchiff,t_kirche], [0,t_kirche]
+                    [             margin,             -margin],
+                    [   -h_turm - margin,             -margin],
+                    [   -h_dach - margin, t_turm / 2 - margin],
+                    [   -h_dach - margin, t_turm / 2 + margin],
+                    [   -h_turm - margin,     t_turm + margin],
+                    [-h_kSchiff - margin,     t_turm + margin],
+                    [-h_kSchiff - margin,   t_kirche + margin],
+                    [             margin,   t_kirche + margin]
                 ]);
-            }
-        cube(2 * margin, center=true);
-    }
 }
 
 module Haus(nx=1, ny=1, margin=def_margin) {
     h_dach = h_haus + b_haus / 2;
     for ( x = [0 : nx - 1], y = [0 : ny - 1] ) {
-        translate([x * b_haus, y * t_haus, 0]) minkowski(){
+        translate([x * b_haus, y * t_haus - margin, 0])
             rotate([-90,0,0])
-                linear_extrude(height=t_haus, convexity=10) {
-                    polygon(points=[[0,0],[b_haus,0],[b_haus,-h_haus],[b_haus/2,-h_dach],[0,-h_haus]]);
-                }
-            cube(2 * margin, center=true);
-        }
+                linear_extrude(height=t_haus + 2 * margin, convexity=10)
+                    polygon(points=[
+                        [-margin, margin],
+                        [b_haus + margin, margin],
+                        [b_haus + margin, -h_haus - margin],
+                        [b_haus/2 + margin, -h_dach - margin],
+                        [b_haus/2 - margin, -h_dach - margin],
+                        [-margin, -h_haus - margin]
+                    ]);
     }
 }
+
+Kirche(margin=1);
 
 module Strasse(nx=1, ny=1, margin=def_margin){
     for ( x = [0 : nx - 1], y = [0 : ny - 1] ) {
