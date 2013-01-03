@@ -2,7 +2,7 @@ include <FigurBlocks.scad>;
 include <Objects.scad>;
 include <box.scad>
 
-rand = 2 + def_margin;
+rand = 4 + def_margin;
 //h_kante = 1.5;
 boden = 1.5;
 steg = 1;
@@ -38,7 +38,7 @@ module RitterBox() {
 	x_scale = (b_basisFiguren + 2*def_margin) / (b_ritterFiguren + 2*def_margin);
 	// Boden
 	difference() {
-		BoxBottom(b_box,t_ritterBox,h_boxBoden, rand, rand, 2 * boden, $fn=fn);
+		BoxBottom(b_box,t_ritterBox,h_boxBoden, rand, rand, 3 * boden, $fn=fn);
 		translate([rand,rand,boden]) BasisFiguren();
 		translate([rand, t_basisBox - rand + steg, boden])
 			scale([x_scale,1,1]) RitterFiguren(h_boxBoden);
@@ -48,14 +48,14 @@ module RitterBox() {
 	}
 	translate([0, 2 * t_ritterBox + 5,h_boxBoden + h_boxDeckel]) rotate(a=180, v=[1,0,0])
 		difference() {
-			translate([0,0,h_boxBoden]) BoxTop(b_box, t_ritterBox, h_boxDeckel, rand, rand, 2 * boden, $fn=fn);
+			translate([0,0,h_boxBoden]) BoxTop(b_box, t_ritterBox, h_boxDeckel, rand, rand, 3 * boden, $fn=fn);
 			translate([rand,rand,boden]) BasisFiguren();
 			translate([rand, t_basisBox - rand + steg, boden])
 				scale([x_scale,1,1]) RitterFiguren(h_boxBoden);
 			//save some volume
 			translate([(b_basisFiguren - b_kirche_4) / 2 + rand - def_margin, rand - def_margin, h_turm + boden])
 				cube([b_kirche_4 + 2*def_margin, t_turm+2*def_margin, t_turm / 3]);
-			translate([(b_basisFiguren - b_haus_5) / 2 + rand - def_margin,
+			#translate([(b_basisFiguren - b_haus_5) / 2 + rand - def_margin,
 						rand+ t_turm - def_margin,
 						boden + h_kSchiff + h_haus])
 				cube([b_haus_5 + 2*def_margin, t_haus + 2*def_margin, b_haus/3]);

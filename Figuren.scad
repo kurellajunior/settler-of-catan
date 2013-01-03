@@ -56,7 +56,7 @@ h_mauer=5.4;
 module Ritter(count = 6, margin = def_margin){
     translate([-margin,r_ritter,r_ritter])
         rotate([0,90,0])
-            cylinder(r=r_ritter + margin, h = count * h_ritter + 2 * margin, center=false, $fa=1, $fs=0.1);
+            cylinder(r=r_ritter + margin, h = count * h_ritter + 2 * margin, center=false, $fa=1, $fs=1);
 }
 
 module Mauer(margin=def_margin){
