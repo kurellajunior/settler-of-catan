@@ -47,6 +47,29 @@ module BoxTop(x, y, z, rx=2, ry=2, rz=2) {
 }
 
 
+module HalfTrapezoid(x1, x2, y, z, r) {
+	$fs=1;
+	angle = atan((x1 - x2) / 2 / y); // counter clockwise around z-achse to reach left edge of trapezoid
+    linear_extrude(height=z)
+		roundTrapez(x1,x2,y,r);
+	if (r > 0) {
+	    translate([r,r,-r])
+		    linear_extrude(height=r)
+				trapez(x1,x2,y);
+		// bottom cylinders
+		translate([r, r, 0]) rotate([0,90,0]) cylinder(r = r, h = x1);
+		translate([r + (x1 - x2) / 2, r + y, 0]) rotate([0,90,0]) cylinder(r = r, h = x2);
+		translate([r, r, 0]) rotate([0,0,-angle]) rotate([-90,0,0]) cylinder(r = r, h = y / cos(angle));
+		translate([r + x1, r, 0]) rotate([0,0, angle]) rotate([-90,0,0]) cylinder(r = r, h = y / cos(angle));
+		// corners
+		translate([r, r, 0]) sphere(r);
+		translate([r + (x1 - x2) / 2, r + y, 0]) sphere(r);
+		translate([r + (x1 - x2) / 2 + x2, r + y, 0]) sphere(r);
+		translate([r + x1, r, 0]) sphere(r);
+	}
+}
+
+HalfTrapezoid(40, 30, 20, 15, 4);
 /*
 BoxTop(40, 30, 8, 2.5, 2.5, 2, $fn=32);
 */
