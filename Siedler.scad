@@ -2,7 +2,7 @@ include <FigurBlocks.scad>;
 include <Objects.scad>;
 include <box.scad>
 
-rand = 4 + def_margin;
+rand = 4;
 //h_kante = 1.5;
 boden = 1.5;
 steg = 1;
@@ -53,13 +53,10 @@ module RitterBox() {
 			translate([rand, t_basisBox - rand + steg, boden])
 				scale([x_scale,1,1]) RitterFiguren(h_boxBoden);
 			//save some volume
-			translate([(b_basisFiguren - b_kirche_4) / 2 + rand - def_margin, rand - def_margin, h_turm + boden])
-				cube([b_kirche_4 + 2*def_margin, t_turm+2*def_margin, t_turm / 3]);
-			// it's impossible to remove the diagonal roof edges and not create e new horizontal edge
-			*translate([(b_basisFiguren - b_haus_5) / 2 + rand - def_margin,
-						rand + t_turm - def_margin,
-						boden + h_kSchiff + h_haus])
-				cube([b_haus_5 + 2*def_margin, t_haus + 2*def_margin, b_haus/3]);
+			translate([(b_basisFiguren - b_haus_5) / 2 + rand - def_margin,
+						rand - def_margin,
+						boden + h_turm])
+				cube([b_haus_5 + 2*def_margin, t_turm + t_haus + 2*def_margin, h_haus - b_haus/2 + def_margin]);
 		}
 	echo("Breite", b_box, "Tiefe", t_ritterBox, "Höhe", h_boxBoden + h_boxDeckel);
 }
