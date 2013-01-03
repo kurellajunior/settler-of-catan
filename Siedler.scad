@@ -55,8 +55,9 @@ module RitterBox() {
 			//save some volume
 			translate([(b_basisFiguren - b_kirche_4) / 2 + rand - def_margin, rand - def_margin, h_turm + boden])
 				cube([b_kirche_4 + 2*def_margin, t_turm+2*def_margin, t_turm / 3]);
-			#translate([(b_basisFiguren - b_haus_5) / 2 + rand - def_margin,
-						rand+ t_turm - def_margin,
+			// it's impossible to remove the diagonal roof edges and not create e new horizontal edge
+			*translate([(b_basisFiguren - b_haus_5) / 2 + rand - def_margin,
+						rand + t_turm - def_margin,
 						boden + h_kSchiff + h_haus])
 				cube([b_haus_5 + 2*def_margin, t_haus + 2*def_margin, b_haus/3]);
 		}
