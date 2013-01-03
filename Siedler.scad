@@ -43,7 +43,7 @@ module RitterBox() {
 		translate([rand, t_basisBox - rand + steg, boden])
 			scale([x_scale,1,1]) RitterFiguren(h_boxBoden);
 		//save some volume
-		translate([rand - def_margin , rand - def_margin, h_boxBoden])
+		*translate([rand - def_margin , rand - def_margin, h_boxBoden])
 			cube([b_basisFiguren + 2*def_margin, t_ritterBox - 2*rand + 2*def_margin, h_haus]);
 	}
 	translate([0, 2 * t_ritterBox + 5,h_boxBoden + h_boxDeckel]) rotate(a=180, v=[1,0,0])
