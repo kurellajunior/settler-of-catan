@@ -1,6 +1,6 @@
 include <FigurBlocks.scad>;
 include <Objects.scad>;
-include <box.scad>
+include <lib/box.scad>
 
 rand = 4;
 //h_kante = 1.5;

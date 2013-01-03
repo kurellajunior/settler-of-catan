@@ -56,7 +56,7 @@ module BoxTop(x, y, z, dx=2, dy=2, dz=2, empty=false) {
 		if (empty) {
 			translate([dx,dy,0]) cube([x - 2 * dx, y - 2 * dy,z - dz]);
 		}
-		translate([dx / 2, dy / 2, -1]) HalteRahmen(x - dx, y - dy, h_kante + 1, dx/2, dy/2, delta = printer_delta);
+		translate([dx / 2, dy / 2, 0]) HalteRahmen(x - dx, y - dy, h_kante, dx/2, dy/2, delta = printer_delta);
 	}
 }
 
