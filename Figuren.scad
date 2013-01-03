@@ -1,4 +1,4 @@
-def_margin=0.1;
+def_margin = 0.125;
 
 b_kirche   = 10.2;
 t_kirche   = 19.9;
