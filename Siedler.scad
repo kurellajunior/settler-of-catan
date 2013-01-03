@@ -5,7 +5,7 @@ include <box.scad>
 rand = 4;
 //h_kante = 1.5;
 boden = 1.5;
-steg = 1;
+steg = 2;
 
 b_box = b_basisFiguren + 2 * rand;
 t_basisBox = 2 * rand + t_turm + t_haus + b_str + def_margin;
