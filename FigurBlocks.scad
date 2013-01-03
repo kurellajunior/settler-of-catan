@@ -44,8 +44,15 @@ module RitterFigurenSchmal(h_box = b_mauer - r_ritter) {
 module RitterFiguren(h_box = b_mauer - r_ritter) {
 	translate([h_mauer,0,0]) rotate([0,0,90]) Mauer();
 	translate([h_mauer, 0, h_box - r_ritter]) Ritter(margin = 2 * def_margin);
-	translate([2 * h_mauer + h_ritter_6, 0]) rotate([0,0,90]) Mauer();
-	translate([(2 * h_mauer + h_ritter_6 - b_mauer) / 2, 2 * r_ritter, 0]) Mauer();
+	translate([b_ritterFiguren, 0]) rotate([0,0,90]) Mauer();
+	translate([(b_ritterFiguren - b_mauer) / 2, 2 * r_ritter, 0]) Mauer();
+	// avoid sharp edges
+	translate([(b_ritterFiguren - b_mauer) / 2, 2 * r_ritter + h_mauer - b_mauer, h_box])
+		rotate([-90,0,0])
+			Mauer();
+	translate([(b_ritterFiguren - b_mauer) / 2, 2 * r_ritter + h_mauer - b_mauer, h_box + h_mauer])
+		rotate([-90,0,0])
+			Mauer();
 }
 
 *BasisFiguren();
