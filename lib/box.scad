@@ -3,8 +3,8 @@ include <Objects.scad>
 h_kante = 2;
 printer_delta = 0.05;
 
-module HalteRahmen(breite, tiefe, h, dx, dy, delta=0) {
-	d = max(dx,dy);
+module HalteRahmen(breite, tiefe, h, d) {
+	delta = -printer_delta;
 	difference() {
 		translate([-delta/2, -delta/2, 0]) cube([breite+delta, tiefe+delta, h]);
 		translate([-delta/2, -delta/2, h/2]) rotate([0,0,45]) cube([d,d,h], center=true);
@@ -33,40 +33,20 @@ module HalfBox(x, y, z, rx, ry, rz) {
 	}
 }
 
-module FullBoxBottom(x, y, z, rx, ry, rz) {
+module BoxBottom(x, y, z, rx=2, ry=2, rz=2) {
 	HalfBox(x, y, z, rx, ry, rz);
-	translate([rx / 2, ry / 2, z]) HalteRahmen(x - rx, y - ry, h_kante, rx/2, ry/2, delta = -printer_delta);
-}
-
-module BoxBottom(x, y, z, rx=2, ry=2, rz=2, empty=false) {
-	if (empty) {
-		difference() {
-			FullBoxBottom(x, y, z, rx, ry, rz);
-			translate([rx,ry,rz]) cube([x - 2 * rx, y - 2 * ry, z + h_kante]);
-		}
-	} else {
-			FullBoxBottom(x, y, z, rx, ry, rz);
-	}
+	translate([rx / 2, ry / 2, z]) HalteRahmen(x - rx, y - ry, h_kante, d = max(rx/2, ry/2));
 }
 
 // Deckel
-module BoxTop(x, y, z, rx=2, ry=2, rz=2, empty=false) {
+module BoxTop(x, y, z, rx=2, ry=2, rz=2) {
 	difference() {
 		translate([0, y, z]) rotate([180,0,0]) HalfBox(x, y, z, rx, ry, rz);
-		if (empty) {
-			translate([rx,ry,0]) cube([x - 2 * rx, y - 2 * ry,z - rz]);
-		}
-		translate([rx / 2, ry / 2, 0]) HalteRahmen(x - rx, y - ry, h_kante, rx/2, ry/2, delta = printer_delta);
+		translate([rx / 2, ry / 2, 0]) HalteRahmen(x - rx, y - ry, h_kante, d = max(rx/2, ry/2));
 	}
 }
 
 
 /*
-module emptyBox(x, y, z_bottom, z_top, rx=2, ry=2, rz=2) {
-	BoxBottom(x, y, z_bottom, rx, ry, rz, empty=true);
-	translate([0,-5,z_top]) rotate([180,0,0]) BoxTop(x, y, z_top, rx, ry, rz, empty=false);
-}
-
-emptyBox(40, 30, 12, 8, 2.5, 2.5, 2, 	$fn=32);
-BoxTop(40, 30, 8, 2.5, 2.5, 2, 	$fn=32);
+BoxTop(40, 30, 8, 2.5, 2.5, 2, $fn=32);
 */
