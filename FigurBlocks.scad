@@ -57,3 +57,18 @@ module RitterFiguren(h_box = b_mauer - r_ritter) {
 
 *BasisFiguren();
 *RitterFiguren(12);
+
+module HouseAndChurch() {
+	difference(){
+		union(){
+			translate([0, b_kirche, 0]) rotate([0,0,-90]) Kirche(margin=0);
+			translate([t_kirche + 2, 0, 0.8 * b_str]) rotate([0,45,0]) Strasse(margin=0);
+			translate([ t_kirche + t_str, 0, h_kSchiff]) Haus(margin=0);
+		}
+		translate([-1, 2, -1]) cube([60, 20, 30]);
+	}
+}
+
+
+
+*HouseAndChurch();
