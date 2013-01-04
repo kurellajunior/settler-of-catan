@@ -74,6 +74,31 @@ module HouseAndChurch() {
 	}
 }
 
-
+module Wall(width=15){
+	height=0.3 * width;
+	space=0.13 * width;
+	dx=(width + space) / 2;
+	difference() {
+		union(){
+			for (x = [1:7], y = [0:6]) {
+				if (y%2 > 0) {
+					translate([x*(width + space) - dx, 0, y*(height + space)]) cube([width, 6, height]);
+				} else {
+					translate([x*(width + space)     , 0, y*(height + space)]) cube([width, 6, height]);
+				}
+			}
+			translate([0, 0, 6*(height + space)]) cube([width, 6, height]);
+		}
+		union(){
+			translate([6*dx - space, -3, -1]) cube([4*dx + space, 12, 3*height + 2*space + 1]);
+			translate([8*dx - space/2,  3, 3*height + 2*space]) rotate([90,0,0]) cylinder(h=12, r=2*dx+space/2, center=true);
+		}
+		// cut left
+		translate([-10 + width + space,-1,0]) cube([10, 8, 5*height + 4*space + 1.1]);
+		// cut right
+		translate([12*dx + width,-1,-1]) cube([20, 8, 5*height + 4*space + 1.1]);
+	}
+}
 
 *HouseAndChurch();
+*Wall();
