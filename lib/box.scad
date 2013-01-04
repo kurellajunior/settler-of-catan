@@ -69,7 +69,7 @@ module HalfTrapezoid(x1, x2, y, z, r) {
 	}
 }
 
-HalfTrapezoid(40, 30, 20, 15, 4);
+//HalfTrapezoid(40, 30, 20, 15, 4);
 /*
 BoxTop(40, 30, 8, 2.5, 2.5, 2, $fn=32);
 */
