@@ -62,8 +62,13 @@ module HouseAndChurch() {
 	difference(){
 		union(){
 			translate([0, b_kirche, 0]) rotate([0,0,-90]) Kirche(margin=0);
-			translate([t_kirche + 2, 0, 0.8 * b_str]) rotate([0,45,0]) Strasse(margin=0);
-			translate([ t_kirche + t_str, 0, h_kSchiff]) Haus(margin=0);
+			//translate([t_kirche + t_str * 0.9, 0, 2]) rotate([0,-60,0]) Strasse(margin=0);
+			translate([t_kirche + b_str - 2, 2, 2])
+			    rotate([90,0,0])
+			        linear_extrude(height=2, convexity=5)
+			            polygon(points=[[0,0],[b_str*1.2,0],[b_str*3.5, t_str*0.6],[b_str*2.8,t_str*0.6]]);
+
+			translate([ t_kirche + t_str - 2, 0, h_kSchiff]) Haus(margin=0);
 		}
 		translate([-1, 2, -1]) cube([60, 20, 30]);
 	}
